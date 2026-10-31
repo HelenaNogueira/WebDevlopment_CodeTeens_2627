@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>O Meu Amor pela Culinária 🍴</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff8f0;
+            color: #333;
+            transition: 0.4s;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            color: white;
+
+            background:
+                linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                url("https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1800&q=80")
+                center/cover;
+        }
+
+        .hero {
+            max-width: 800px;
+            animation: aparecer 1.5s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #ff7043;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .botao:hover {
+            background: #e64a19;
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        /* ================= NAVEGAÇÃO ================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ff5722;
+        }
+
+        /* ================= SECÇÕES ================= */
+
+        section {
+            padding: 80px 8%;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #e64a19;
+        }
+
+        .subtitulo {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #666;
+        }
+
+        /* ================= SOBRE ================= */
+
+        .sobre {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        /* ================= FILTROS ================= */
+
+        .filtros {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .filtro {
+            margin: 5px;
+            padding: 10px 20px;
+            border: 2px solid #ff7043;
+            background: transparent;
+            color: #e64a19;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filtro:hover,
+        .filtro.ativo {
+            background: #ff7043;
+            color: white;
+        }
+
+        /* ================= PRATOS ================= */
+
+        .pratos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .conteudo {
+            padding: 20px;
+        }
+
+        .conteudo h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .conteudo p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .like {
+            border: none;
+            background: #ffe9e2;
+            color: #e64a19;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .like:hover {
+            transform: scale(1.1);
+        }
+
+        .like.gostei {
+            background: #ff7043;
+            color: white;
+        }
+
+        /* ================= CONTADOR ================= */
+
+        .contador {
+            text-align: center;
+            margin-top: 50px;
+            background: #ff7043;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .numero {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        /* ================= GALERIA ================= */
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .galeria img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .galeria img:hover {
+            transform: scale(1.04);
+            filter: brightness(1.1);
+        }
+
+        /* ================= MENSAGEM ================= */
+
+        .mensagem {
+            text-align: center;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        #mensagem {
+            font-size: 1.4rem;
+            margin: 30px 0;
+            min-height: 40px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #2d2d2d;
+            color: white;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.escuro {
+            background: #181818;
+            color: #eee;
+        }
+
+        body.escuro nav {
+            background: #242424;
+        }
+
+        body.escuro nav a {
+            color: white;
+        }
+
+        body.escuro .subtitulo,
+        body.escuro .conteudo p {
+            color: #ccc;
+        }
+
+        body.escuro .card {
+            background: #252525;
+        }
+
+        /* ================= ANIMAÇÃO ================= */
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                gap: 12px;
+                font-size: 0.85rem;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <header>
+        <div class="hero">
+            <h1>🍴 A Minha Cozinha</h1>
+
+            <p>
+                Bem-vindos ao meu cantinho culinário!
+                Aqui partilho uma das minhas maiores paixões:
+                transformar ingredientes simples em pratos deliciosos.
+            </p>
+
+            <a href="#pratos" class="botao">
+                Descobrir os meus pratos
+            </a>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO -->
+
+    <nav>
+        <a href="#sobre">Sobre mim</a>
+        <a href="#pratos">Pratos</a>
+        <a href="#galeria">Galeria</a>
+
+        <button class="filtro" onclick="modoEscuro()">
+            🌙
+        </button>
+    </nav>
+
+    <!-- SOBRE -->
+
+    <section id="sobre">
+
+        <h2 class="titulo">👨‍🍳 Sobre a minha paixão</h2>
+
+        <p class="subtitulo">
+            Cozinhar não é apenas preparar comida...
+            é criar momentos.
+        </p>
+
+        <div class="sobre">
+
+            <p>
+                Desde experimentar novas receitas até inventar os meus
+                próprios pratos, a culinária é uma forma de criatividade
+                e diversão para mim.
+            </p>
+
+            <br>
+
+            <p>
+                Gosto especialmente de experimentar sabores diferentes,
+                descobrir novas combinações e, claro, partilhar aquilo
+                que faço com os meus amigos.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- PRATOS -->
+
+    <section id="pratos">
+
+        <h2 class="titulo">🍽️ Os meus pratos favoritos</h2>
+
+        <p class="subtitulo">
+            Escolhe uma categoria para descobrir alguns dos meus favoritos.
+        </p>
+
+        <div class="filtros">
+
+            <button class="filtro ativo" onclick="filtrar('todos', this)">
+                Todos
+            </button>
+
+            <button class="filtro" onclick="filtrar('massa', this)">
+                🍝 Massa
+            </button>
+
+            <button class="filtro" onclick="filtrar('pizza', this)">
+                🍕 Pizza
+            </button>
+
+            <button class="filtro" onclick="filtrar('doce', this)">
+                🍰 Doces
+            </button>
+
+        </div>
+
+        <div class="pratos">
+
+            <div class="card" data-categoria="massa">
+
+                <img
+                    src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80"
+                    alt="Prato de massa"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍝 Massa Cremosa</h3>
+
+                    <p>
+                        Uma massa cremosa e reconfortante,
+                        perfeita para um jantar especial.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" data-categoria="pizza">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80"
+                    alt="Pizza"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍕 Pizza Caseira</h3>
+
+                    <p>
+                        Massa estaladiça, molho de tomate,
+                        queijo e muitos ingredientes.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" data-categoria="massa">
+
+                <img
+                    src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80"
+                    alt="Esparguete"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍝 Esparguete</h3>
+
+                    <p>
+                        Um clássico que nunca desilude,
+                        simples, saboroso e fácil de reinventar.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" data-categoria="doce">
+
+                <img
+                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80"
+                    alt="Bolo de chocolate"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍫 Bolo de Chocolate</h3>
+
+                    <p>
+                        Porque qualquer refeição fica melhor
+                        com uma boa sobremesa.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" data-categoria="doce">
+
+                <img
+                    src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80"
+                    alt="Cheesecake"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍰 Cheesecake</h3>
+
+                    <p>
+                        Cremoso, fresco e perfeito para
+                        terminar uma refeição.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" data-categoria="pizza">
+
+                <img
+                    src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80"
+                    alt="Pizza artesanal"
+                >
+
+                <div class="conteudo">
+
+                    <h3>🍕 Pizza Artesanal</h3>
+
+                    <p>
+                        Uma pizza feita com criatividade,
+                        bons ingredientes e muito sabor.
+                    </p>
+
+                    <button class="like" onclick="gostar(this)">
+                        ❤️ Gosto
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="contador">
+
+            <p>❤️ Pratos de que gostei</p>
+
+            <div class="numero" id="contador">
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GALERIA -->
+
+    <section id="galeria">
+
+        <h2 class="titulo">📸 Galeria</h2>
+
+        <p class="subtitulo">
+            Alguns sabores que me inspiram.
+        </p>
+
+        <div class="galeria">
+
+            <img
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
+                alt="Mesa com comida"
+                onclick="ampliar(this)"
+            >
+
+            <img
+                src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=80"
+                alt="Ingredientes"
+                onclick="ampliar(this)"
+            >
+
+            <img
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80"
+                alt="Prato saudável"
+                onclick="ampliar(this)"
+            >
+
+            <img
+                src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=900&q=80"
+                alt="Pizza"
+                onclick="ampliar(this)"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- MENSAGEM -->
+
+    <section>
+
+        <div class="mensagem">
+
+            <h2 class="titulo">
+                🎲 Queres uma recomendação?
+            </h2>
+
+            <p class="subtitulo">
+                Clica no botão e deixa a sorte escolher!
+            </p>
+
+            <button class="botao" onclick="recomendar()">
+                🍴 Escolher prato
+            </button>
+
+            <div id="mensagem"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Feito com ❤️, criatividade e muita fome 🍴
+        </p>
+
+        <p>
+            © 2026 - O Meu Cantinho Culinário
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* ================= CONTADOR DE LIKES ================= */
+
+        let totalGostos = 0;
+
+        function gostar(botao) {
+
+            if (botao.classList.contains("gostei")) {
+
+                botao.classList.remove("gostei");
+                botao.innerHTML = "❤️ Gosto";
+
+                totalGostos--;
+
+            } else {
+
+                botao.classList.add("gostei");
+                botao.innerHTML = "💖 Gostei!";
+
+                totalGostos++;
+
+            }
+
+            document.getElementById("contador").innerText = totalGostos;
+        }
+
+
+        /* ================= FILTRO ================= */
+
+        function filtrar(categoria, botao) {
+
+            const cards = document.querySelectorAll(".card");
+            const botoes = document.querySelectorAll(".filtro");
+
+            botoes.forEach(b => b.classList.remove("ativo"));
+
+            botao.classList.add("ativo");
+
+            cards.forEach(card => {
+
+                if (
+                    categoria === "todos" ||
+                    card.dataset.categoria === categoria
+                ) {
+
+                    card.style.display = "block";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        function modoEscuro() {
+
+            document.body.classList.toggle("escuro");
+
+        }
+
+
+        /* ================= RECOMENDAÇÃO ================= */
+
+        function recomendar() {
+
+            const pratos = [
+                "🍕 Hoje é dia de pizza!",
+                "🍝 Que tal uma bela massa?",
+                "🍫 Um bolo de chocolate seria perfeito!",
+                "🍰 Cheesecake é sempre uma boa ideia!",
+                "👨‍🍳 Experimenta inventar uma receita nova!"
+            ];
+
+            const escolha =
+                pratos[Math.floor(Math.random() * pratos.length)];
+
+            document.getElementById("mensagem").innerText = escolha;
+        }
+
+
+        /* ================= GALERIA ================= */
+
+        function ampliar(imagem) {
+
+            const janela = document.createElement("div");
+
+            janela.style.position = "fixed";
+            janela.style.top = "0";
+            janela.style.left = "0";
+            janela.style.width = "100%";
+            janela.style.height = "100%";
+            janela.style.background = "rgba(0,0,0,0.9)";
+            janela.style.display = "flex";
+            janela.style.justifyContent = "center";
+            janela.style.alignItems = "center";
+            janela.style.zIndex = "999";
+
+            const img = document.createElement("img");
+
+            img.src = imagem.src;
+
+            img.style.maxWidth = "90%";
+            img.style.maxHeight = "90%";
+            img.style.borderRadius = "15px";
+
+            janela.appendChild(img);
+
+            janela.onclick = function() {
+                janela.remove();
+            };
+
+            document.body.appendChild(janela);
+        }
+
+    </script>
+
+</body>
+</html>
